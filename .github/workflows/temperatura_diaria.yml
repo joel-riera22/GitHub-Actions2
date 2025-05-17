@@ -34,7 +34,7 @@ jobs:
 
     - name: Redefineix el remote amb token
       run: |
-        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/joel-riera22/GitHub-Actions2.git
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/joel-riera22/GitHub-Actions2/
 
     - name: Afegeix i puja el fitxer JSON al repositori
       run: |
