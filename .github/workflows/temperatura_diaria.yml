@@ -1,0 +1,42 @@
+name: Recollida i pujada de temperatura diària
+
+on:
+  schedule:
+    - cron: '59 23 * * *'  # Executa cada dia a les 23:59 UTC
+  workflow_dispatch:        # També es pot executar manualment
+
+jobs:
+  recollida_temperatura:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clona el repositori
+      uses: actions/checkout@v3
+
+    - name: Configura Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Instal·la dependències
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests
+
+    - name: Executa el programa Python
+      run: |
+        python calcul_temp.py  # Substitueix pel nom del teu script
+
+    - name: Configura Git per fer commit
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+
+    - name: Afegeix i puja el fitxer JSON al repositori
+      run: |
+        git add temp_*.json
+        git commit -m "Afegit fitxer de temperatura diària"
+        git push
+      env:
+        # Token necessari per autoritzar el push
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
