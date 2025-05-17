@@ -26,11 +26,15 @@ jobs:
     - name: Executa el programa Python
       run: |
         python calcul_temp.py  # Substitueix pel nom del teu script
-
+        
     - name: Configura Git per fer commit
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
+
+    - name: Redefineix el remote amb token
+      run: |
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/joel-riera22/GitHub-Actions2.git
 
     - name: Afegeix i puja el fitxer JSON al repositori
       run: |
