@@ -2,7 +2,7 @@ name: Recollida i pujada de temperatura diària
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # S'executa cada 5 minuts
+    - cron: '59 23 * * *'  # S'executa cada dia a les 23:59 UTC
   workflow_dispatch:        # També es pot executar manualment
 
 jobs:
